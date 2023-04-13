@@ -7,10 +7,9 @@ fetch("http://localhost:5678/api/works")
     displayData(data)
   })
 
-  const displayData = (data) => {
+  const displayData = (data, idCat = 0) => {
     const gallery = document.querySelector("#portfolio .gallery")
     for  ( let item of data){
-      console.log(item)
       const img = 
       `<figure>
       <img src="${item.imageUrl}" alt="Abajour Tahina">
@@ -22,22 +21,33 @@ fetch("http://localhost:5678/api/works")
   
   fetch("http://localhost:5678/api/categories")
   .then(response => {
-    console.log(response.ok)
+    console.log(response.status)
     return response.json();
 })
+.then(categories => {
+ // console.log(categories)
+    displayCategory(categories)
+  })
 
-
-const displayCategory = (data) => {
+  const displayCategory = (categories) => {
+    console.log(categories)
   const category = document.querySelector("#portfolio .btn")
-  for ( let item of data){
-    console.log(item.category)
+  for ( let item of categories){
+    console.log(item.name)
     const button =
-    ` <button>Tous</button>
-			<button class="objet">Objets</button>
-			<button class="appartement">Appartement</button>
-			<button class="hotelRestau">Hôtel & restaurants</button>`
+    ` <button data-idcat = ${item.id}>${item.name}</button>
+			`
     category.insertAdjacentHTML('beforeend',button)
   }
+  const buttonTous = `<button data-idcat = "0">Tous</button>`
+  category.insertAdjacentHTML('afterbegin', buttonTous)
+  const buttonsCat = document.querySelectorAll("#portfolio .btn button")
+  console.log(buttonsCat)
+  for ( let buttonCat of buttonsCat){
+    const idCat = buttonCat.dataset.idcat;
+    console.log(idCat)
+  }
+  
 }
 
 
