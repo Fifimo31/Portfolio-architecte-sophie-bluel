@@ -10,6 +10,7 @@ fetch("http://localhost:5678/api/works")
   const displayData = (data, idCat = 0) => {
     const gallery = document.querySelector("#portfolio .gallery")
     for  ( let item of data){
+      console.log()
       const img = 
       `<figure>
       <img src="${item.imageUrl}" alt="Abajour Tahina">
@@ -17,6 +18,8 @@ fetch("http://localhost:5678/api/works")
       </figure>`;
       gallery.insertAdjacentHTML('beforeend',img)
     }
+    
+   
   }
   
   fetch("http://localhost:5678/api/categories")
@@ -49,6 +52,7 @@ fetch("http://localhost:5678/api/works")
   }
   
 }
+
 
 
 
