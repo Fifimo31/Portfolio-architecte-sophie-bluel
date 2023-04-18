@@ -17,6 +17,7 @@ fetch("http://localhost:5678/api/works")
       <figcaption>${item.title}</figcaption>
       </figure>`;
       gallery.insertAdjacentHTML('beforeend',img)
+      console.log(idCat)
     }
     
    
@@ -44,12 +45,16 @@ fetch("http://localhost:5678/api/works")
   }
   const buttonTous = `<button data-idcat = "0">Tous</button>`
   category.insertAdjacentHTML('afterbegin', buttonTous)
-  const buttonsCat = document.querySelectorAll("#portfolio .btn button")
-  console.log(buttonsCat)
+  const buttonsCat = document.querySelectorAll("#portfolio, .btn, button")
+  
   for ( let buttonCat of buttonsCat){
     const idCat = buttonCat.dataset.idcat;
-    console.log(idCat)
+    buttonCat.addEventListener("click",(idCat)=>{
+      console.log()
+    })
+    
   }
+  
   
 }
 
