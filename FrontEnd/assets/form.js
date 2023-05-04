@@ -1,9 +1,21 @@
-fetch("http://localhost:5678/api/users/login")
-.then(response => {
-console.log(response.ok)
-return response.json();
-})
-.then(login => {
-// console.log(login)
-btnLogin(login)
-})
+async function postData(url = "", data = {}) {
+    
+    const response = await fetch(url, {
+      method: "POST", 
+      mode: "cors", 
+      cache: "no-cache", 
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        
+      },
+      redirect: "follow", 
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(data), 
+    });
+    return response.json();
+  }
+  
+  postData("http://localhost:5678/api/users/login", { userId: 1 }).then((data) => {
+    console.log(data); 
+  });
