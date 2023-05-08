@@ -25,15 +25,26 @@
     </header>
     <main>
         <h2>log In</h2>
-        <form>
+        <!--<form>
             <label for="email">E-mail</label><br>
             <input type="email" id="email" name="email"><br>
             <label for="login">Mot de passe</label><br>
             <input type="login" id="login" name="login">
             <input type="submit" value="Se connecter">
             <a href="#">Mot de passe oublié</a>
-        </form>
-
+        </form>-->
+        <form onsubmit="handleFormSubmit(event)">
+            <label for="username">Nom d'utilisateur:</label>
+            <input type="text" id="username" name="username"><br>
+          
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password"><br>
+          
+            <button type="submit">Se connecter</button>
+          </form>
+          
+          <div id="error-message"></div>
+          
     </main>
     
     <script src="form.js"></script>
