@@ -53,8 +53,8 @@ const data = JSON.parse(sessionStorage.getItem('data'))
 console.log(data)
 
 for ( let buttonCat of buttonsCat){
-  buttonCat.addEventListener("click",(e)=>{
- 
+  
+ buttonCat.addEventListener("click",(e)=>{
 
     const idCat = parseInt(e.target.dataset.idcat);
     displayData(data, idCat)
