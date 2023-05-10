@@ -16,7 +16,7 @@ function handleFormSubmit(event) {
   .then(response => {
     if (response.ok) {
       // la connexion a réussi, redirige l'utilisateur vers la page d'accueil
-      window.location.href = '/accueil.html';
+      window.location.href = '/index.html';
     } else {
       // la connexion a échoué, affiche un message d'erreur
       const errorMessage = document.getElementById('error-message');
