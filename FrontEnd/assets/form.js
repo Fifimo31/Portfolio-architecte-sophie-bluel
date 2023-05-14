@@ -18,12 +18,8 @@ formAdmin.addEventListener("submit",(e)=>{
 })
 
 
-function handleFormSubmit(user) {
+const handleFormSubmit = (user) => {
 
-  // empêche le formulaire de se soumettre automatiquement
-
-
-  // envoie une requête POST à l'API pour vérifier les informations de connexion
   fetch('http://localhost:5678/api/users/login', {
     method: 'POST',
     headers: {
