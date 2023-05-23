@@ -1,31 +1,40 @@
-const dataUrl = "http://localhost:5678/api/works";
-let allData = [];
+const dataUrl = "http://localhost:5678/api/works";// ce code permet de récupérerer l'url de mon api
+let allData = [];//crée une variable appelée allDataet lui attribue une valeur initiale vide, représentée par un tableau vide ( []).
+                //Cette déclaration est utile pour initialiser une variable qui sera utilisée pour stocker des données ou accumuler des valeurs au fur et à mesure
+                // de l'exécution de votre code. Le tableau vide permet de prévoir un conteneur où vous pourrez ajouter des éléments proposés.
 
-const loadData = async (dataUrl) => {
-fetch(dataUrl)
-.then(response => {
-console.log(response.ok)
-return response.json();
+const loadData = async (dataUrl) => {//Ce code définit une fonction loadData et prend un paramètre dataUrl
+                                    //La fonction loadData est déclarée avec le mot-clé async, ce qui indique qu'elle sera asynchrone et qu'elle retournera une promesse.
+fetch(dataUrl)     // La fonction fetch()renvoie une promesse qui représente la réponse de la requête
+.then(response => {//Ensuite, nous utilisons la méthode .then()pour attacher un gestionnaire de réussite à cette promesse
+                  //Le gestionnaire de réussite est la fonction fléchée response => { ... }qui prend comme argument la réponse de la requête
+console.log(response.ok)//À l'intérieur de ce gestionnaire, nous effectuons un console.log(response.ok) pour afficher dans la console la propriété ok de l'objet response.
+                        // La propriété ok est un booléen qui indique si la réponse de la requête a été réussie ( true) ou non ( false).
+return response.json();// return permet d'obtenir le résultat à la réponse
 })
-.then(data => {
-sessionStorage.setItem('data', JSON.stringify(data))
+.then(data => {// la méthode then() est utilisé pour gérer la réponse de la requête 
+                //Le paramètre data représente les données récupérées de la requête
+sessionStorage.setItem('data', JSON.stringify(data))// les éléments de l'API sont stocké dans data 
+                                                    // sessionStorage permet de stoker une paire clé-valeur temporairement dans la session stokage du navigateur
+                                                      //setItem  permet de stocker des données importantes dans sessionStorage
+                                                      //stringify est utilisée pour convertir les données JavaScript ( data) en une chaîne de caractères JSON
 allData = data;
-displayData(data);
+displayData(data);//displayData est appelé avec data comme argument pour afficher le contenue de data 
 })
 }
-loadData(dataUrl)
+loadData(dataUrl)//loadData est appelé avec dataUrl comme argument pour afficher le contenue de l'url
 
-const displayData = (data, idCat = 0) => {
-console.log(idCat)
-const gallery = document.querySelector("#portfolio .gallery")
-gallery.innerHTML = "";
-const filteredData = idCat === 0 ? allData : allData.filter(item => item.categoryId === idCat);
-for ( let item of filteredData){
-console.log()
-const img =
-`<figure> <img src="${item.imageUrl}" alt="Abajour Tahina"> <figcaption>${item.title}</figcaption> </figure>`;
-gallery.insertAdjacentHTML('beforeend',img)
-  }
+const displayData = (data, idCat = 0) => {// const displayData est une fonction qui retourne les images
+  console.log(data)
+  const gallery = document.querySelector("#portfolio .gallery")// on a récupérer l'ID est la class avec querySelector
+  gallery.innerHTML = ""; // on la donc insérer avec innerHTML
+  const filteredData = idCat === 0 ? allData : allData.filter(item => item.categoryId === idCat); //filtrage des donner par rapport a la catégoryId
+  for ( let item of filteredData){// la boucle for of et utilisé pour parcourir des élément itérable
+  console.log(item)
+  const img =
+  `<figure> <img src="${item.imageUrl}" alt="Abajour Tahina"> <figcaption>${item.title}</figcaption> </figure>`;
+  gallery.insertAdjacentHTML('beforeend',img)// j'ai récupérer les éléments à partir de fiteredData en parcourant la boucle for 
+    }
 }
 fetch("http://localhost:5678/api/categories")
 .then(response => {
