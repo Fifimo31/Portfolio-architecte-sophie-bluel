@@ -5,22 +5,22 @@ let allData = [];//crée une variable appelée allDataet lui attribue une valeur
 
 const loadData = async (dataUrl) => {//Ce code définit une fonction loadData et prend un paramètre dataUrl
                                     //La fonction loadData est déclarée avec le mot-clé async, ce qui indique qu'elle sera asynchrone et qu'elle retournera une promesse.
-fetch(dataUrl)     // La fonction fetch()renvoie une promesse qui représente la réponse de la requête
-.then(response => {//Ensuite, nous utilisons la méthode .then()pour attacher un gestionnaire de réussite à cette promesse
-                  //Le gestionnaire de réussite est la fonction fléchée response => { ... }qui prend comme argument la réponse de la requête
-console.log(response.ok)//À l'intérieur de ce gestionnaire, nous effectuons un console.log(response.ok) pour afficher dans la console la propriété ok de l'objet response.
-                        // La propriété ok est un booléen qui indique si la réponse de la requête a été réussie ( true) ou non ( false).
-return response.json();// return permet d'obtenir le résultat à la réponse
-})
-.then(data => {// la méthode then() est utilisé pour gérer la réponse de la requête 
-                //Le paramètre data représente les données récupérées de la requête
-sessionStorage.setItem('data', JSON.stringify(data))// les éléments de l'API sont stocké dans data 
-                                                    // sessionStorage permet de stoker une paire clé-valeur temporairement dans la session stokage du navigateur
-                                                      //setItem  permet de stocker des données importantes dans sessionStorage
-                                                      //stringify est utilisée pour convertir les données JavaScript ( data) en une chaîne de caractères JSON
-allData = data;
-displayData(data);//displayData est appelé avec data comme argument pour afficher le contenue de data 
-})
+  fetch(dataUrl)     // La fonction fetch()renvoie une promesse qui représente la réponse de la requête
+  .then(response => {//Ensuite, nous utilisons la méthode .then()pour attacher un gestionnaire de réussite à cette promesse
+                    //Le gestionnaire de réussite est la fonction fléchée response => { ... }qui prend comme argument la réponse de la requête
+  console.log(response.ok)//À l'intérieur de ce gestionnaire, nous effectuons un console.log(response.ok) pour afficher dans la console la propriété ok de l'objet response.
+                          // La propriété ok est un booléen qui indique si la réponse de la requête a été réussie ( true) ou non ( false).
+  return response.json();// return permet d'obtenir le résultat à la réponse
+  })
+  .then(data => {// la méthode then() est utilisé pour gérer la réponse de la requête 
+                  //Le paramètre data représente les données récupérées de la requête
+  sessionStorage.setItem('data', JSON.stringify(data))// les éléments de l'API sont stocké dans data 
+                                                      // sessionStorage permet de stoker une paire clé-valeur temporairement dans la session stokage du navigateur
+                                                        //setItem  permet de stocker des données importantes dans sessionStorage
+                                                        //stringify est utilisée pour convertir les données JavaScript ( data) en une chaîne de caractères JSON
+  allData = data;
+  displayData(data);//displayData est appelé avec data comme argument pour afficher le contenue de data 
+  })
 }
 loadData(dataUrl)//loadData est appelé avec dataUrl comme argument pour afficher le contenue de l'url
 
@@ -29,6 +29,7 @@ const displayData = (data, idCat = 0) => {// const displayData est une fonction 
   const gallery = document.querySelector("#portfolio .gallery")// on a récupérer l'ID est la class avec querySelector
   gallery.innerHTML = ""; // on la donc insérer avec innerHTML
   const filteredData = idCat === 0 ? allData : allData.filter(item => item.categoryId === idCat); //filtrage des donner par rapport a la catégoryId
+                                                                                                  //le "?" si la valeur est vrais et les ":" si la valeur est fausse
   for ( let item of filteredData){// la boucle for of et utilisé pour parcourir des élément itérable
   console.log(item)
   const img =
@@ -47,27 +48,27 @@ btnCategories(categories)
 })
 
 const btnCategories = (categories) => {
-console.log(categories)
-const category = document.querySelector("#portfolio .btn")
-for ( let item of categories){
-console.log(item.name)
-const button =
-`<button data-idcat="${item.id}">${item.name}</button>` 
-category.insertAdjacentHTML('beforeend',button)
-}
-const buttonTous = `<button data-idcat="0">Tous</button>`
-category.insertAdjacentHTML('afterbegin', buttonTous)
-const buttonsCat = document.querySelectorAll("#portfolio .btn button")
-const data = JSON.parse(sessionStorage.getItem('data'))
-console.log(data)
+  console.log(categories)
+  const category = document.querySelector("#portfolio .btn")
+  for ( let item of categories){
+  console.log(item.name)
+  const button =
+  `<button data-idcat="${item.id}">${item.name}</button>`
+  category.insertAdjacentHTML('beforeend',button)
+  }
+  const buttonTous = `<button data-idcat="0">Tous</button>`
+  category.insertAdjacentHTML('afterbegin', buttonTous)
+  const buttonsCat = document.querySelectorAll("#portfolio .btn button")
+  const data = JSON.parse(sessionStorage.getItem('data'));//data est une clé dans sessionStorage?????  
+  console.log(data)//elle affiche directement la valeur??????
 
-for ( let buttonCat of buttonsCat){
-  
- buttonCat.addEventListener("click",(e)=>{
+  for ( let buttonCat of buttonsCat){// buttonCat permet de parcourir tout les bouttons
+    
+  buttonCat.addEventListener("click",(e)=>{
 
-    const idCat = parseInt(e.target.dataset.idcat);
-    displayData(data, idCat)
-  })
-  
-}  
+      const idCat = parseInt(e.target.dataset.idcat);//????e=evenement, target=cible, dataset= base de donnée, et récupére l'idcat
+      displayData(data, idCat)
+    })
+    
+  }  
 }
