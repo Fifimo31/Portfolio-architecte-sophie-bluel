@@ -31,7 +31,7 @@ const displayData = (data, idCat = 0) => {// const displayData est une fonction 
   const filteredData = idCat === 0 ? allData : allData.filter(item => item.categoryId === idCat); //filtrage des donner par rapport a la catégoryId
                                                                                                   //le "?" si la valeur est vrais et les ":" si la valeur est fausse
   for ( let item of filteredData){// la boucle for of et utilisé pour parcourir des élément itérable
-  console.log(item)
+  console.log()
   const img =
   `<figure> <img src="${item.imageUrl}" alt="Abajour Tahina"> <figcaption>${item.title}</figcaption> </figure>`;
   gallery.insertAdjacentHTML('beforeend',img)// j'ai récupérer les éléments à partir de fiteredData en parcourant la boucle for 

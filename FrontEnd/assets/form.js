@@ -1,29 +1,28 @@
-//cibler le formulaire
 const formAdmin = document.querySelector("form");
 
-const emailField =
+const emailField = // champ d'email
   `<label for="email">E-mail</label><br>
   <input type="email" id="email" name="email"><br>`;
 formAdmin.insertAdjacentHTML('beforeend', emailField);
 
-const loginField =
+const loginField = // champ de connexion
   `<label for="login">Mot de passe</label><br>
-  <input type="password" id="login" name="login">`;
+  <input type="password" id="login" name="login">`; // "password" permet de masquer le mot de passe
 formAdmin.insertAdjacentHTML('beforeend', loginField);
 
-const submitButton =
+const submitButton = // (submit = soumettre)
   `<input type="submit" value="Se connecter">`;
 formAdmin.insertAdjacentHTML('beforeend', submitButton);
 
-const forgotPasswordLink =
+const forgotPasswordLink = // lien de mot de passe oublié
   `<a href="#">Mot de passe oublié</a>`;
 formAdmin.insertAdjacentHTML('beforeend', forgotPasswordLink);
 
 // Gestionnaire d'événement pour le bouton de soumission
 formAdmin.addEventListener("submit", (e) => {
-  e.preventDefault(); // Prevent form submission
+  e.preventDefault(); // empêche la soumission du formulaire avant la transmission des informations demander 
 
-  const email = document.getElementById('email').value;
+  const email = document.getElementById('email').value;//value est utilisé pour accéder à la valeur actuelle de cet élément, c'est-à-dire le texte saisi par l'utilisateur
   const login = document.getElementById('login').value;
 
   if (email === "sophie.bluel@test.tld" && login === "S0phie") {
@@ -31,26 +30,28 @@ formAdmin.addEventListener("submit", (e) => {
   } else {
     const errorMessage = "Invalid email or password";
     displayMessage(errorMessage);
+    console.log(errorMessage)
   }
 });
 
-function displayMessage(message) {
-  const errorContainer = document.getElementById('errorContainer');
-  errorContainer.textContent = message;
-}
 
-const user = "http://localhost:5678/api/users/login";
-
-fetch(user, {
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  },
-  method: "POST",
-  body: JSON.stringify(user)
-})
-  .then((res) => { console.log(res) })
-  .catch((res) => { console.log(res) });
+  const data = "http://localhost:5678/api/users/login";
+  const submitForm = async(data) => {
+  
+  fetch(data, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+    .then((res) => {
+      console.log(res);})
+    
+      .catch((error) => {
+      console.log(error);});
+};
 
 
 
