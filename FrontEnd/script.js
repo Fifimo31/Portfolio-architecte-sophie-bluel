@@ -3,7 +3,7 @@ let allData = [];//crée une variable appelée allDataet lui attribue une valeur
                 //Cette déclaration est utile pour initialiser une variable qui sera utilisée pour stocker des données ou accumuler des valeurs au fur et à mesure
                 // de l'exécution de votre code. Le tableau vide permet de prévoir un conteneur où vous pourrez ajouter des éléments proposés.
 
-const loadData = async (dataUrl) => {//Ce code définit une fonction loadData et prend un paramètre dataUrl
+const loadData = async (dataUrl) => {//Ce code définit une fonction loadData et prend un paramètre dataUrl async=non blocant
                                     //La fonction loadData est déclarée avec le mot-clé async, ce qui indique qu'elle sera asynchrone et qu'elle retournera une promesse.
   fetch(dataUrl)     // La fonction fetch()renvoie une promesse qui représente la réponse de la requête
   .then(response => {//Ensuite, nous utilisons la méthode .then()pour attacher un gestionnaire de réussite à cette promesse
@@ -27,7 +27,7 @@ loadData(dataUrl)//loadData est appelé avec dataUrl comme argument pour affiche
 const displayData = (data, idCat = 0) => {// const displayData est une fonction qui retourne les images
   console.log(data)
   const gallery = document.querySelector("#portfolio .gallery")// on a récupérer l'ID est la class avec querySelector
-  gallery.innerHTML = ""; // on la donc insérer avec innerHTML
+  gallery.innerHTML = ""; // on la donc insérer avec innerHTML ?????
   const filteredData = idCat === 0 ? allData : allData.filter(item => item.categoryId === idCat); //filtrage des donner par rapport a la catégoryId
                                                                                                   //le "?" si la valeur est vrais et les ":" si la valeur est fausse
   for ( let item of filteredData){// la boucle for of et utilisé pour parcourir des élément itérable
@@ -59,14 +59,14 @@ const btnCategories = (categories) => {
   const buttonTous = `<button data-idcat="0">Tous</button>`
   category.insertAdjacentHTML('afterbegin', buttonTous)
   const buttonsCat = document.querySelectorAll("#portfolio .btn button")
-  const data = JSON.parse(sessionStorage.getItem('data'));//data est une clé dans sessionStorage?????  
-  console.log(data)//elle affiche directement la valeur??????
+  const data = JSON.parse(sessionStorage.getItem('data')); 
+  console.log(data[0].title)//elle affiche directement la valeur??????
 
   for ( let buttonCat of buttonsCat){// buttonCat permet de parcourir tout les bouttons
     
   buttonCat.addEventListener("click",(e)=>{
 
-      const idCat = parseInt(e.target.dataset.idcat);//????e=evenement, target=cible, dataset= base de donnée, et récupére l'idcat
+      const idCat = parseInt(e.target.dataset.idcat);//parseInt=transformer une chaine de caractère en un nombre, e=evenement, target=cible, dataset= c'est un objet qui récupére tous les attribut qui commence par "data-...", et récupére l'idcat
       displayData(data, idCat)
     })
     
