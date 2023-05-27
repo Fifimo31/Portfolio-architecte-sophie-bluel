@@ -45,7 +45,10 @@ formAdmin.addEventListener("submit", (e) => {
     
   })
     .then((response) => response.json())
-    .then((json) => console.log(json));
+    .then((json) => {
+      console.log(json)
+      sessionStorage.setItem('token', json.token)
+    });
   }
 
   console.log(data)
