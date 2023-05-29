@@ -28,22 +28,18 @@ formAdmin.addEventListener("submit", (e) => {
     .then((response) => response.json())
     .then((json) => {
       console.log(json)
+      sessionStorage.setItem('token', json.token)
+      if(json.token) {
+      window.location.href = "http://127.0.0.1:5501/FrontEnd/index.html" } 
+      else {json.message} 
+
     });
-  
+    displayToken(token)
   }
 
   console.log(data)
   const response = validForm(url, data)
   console.log(response)
-
-  if (email === "sophie.bluel@test.tld" && login === "S0phie") {
-    window.location.href = "http://127.0.0.1:5501/FrontEnd/index.html";
-
-  } else {
-    const errorMessage = response;
-    displayMessage(errorMessage);
-    console.log(errorMessage)
-  }
 })
 
 

@@ -60,7 +60,7 @@ const btnCategories = (categories) => {
   category.insertAdjacentHTML('afterbegin', buttonTous)
   const buttonsCat = document.querySelectorAll("#portfolio .btn button")
   const data = JSON.parse(sessionStorage.getItem('data')); 
-  console.log(data[0].title)//elle affiche directement la valeur??????
+  console.log(data[0].title)//
 
   for ( let buttonCat of buttonsCat){// buttonCat permet de parcourir tout les bouttons
     
