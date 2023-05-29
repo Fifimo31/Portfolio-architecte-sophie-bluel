@@ -35,6 +35,7 @@ formAdmin.addEventListener("submit", (e) => {
 
     });
     displayToken(token)
+    .catch(Error) 
   }
 
   console.log(data)
