@@ -1,3 +1,4 @@
+const token = sessionStorage.getItem('token');
 const dataUrl = "http://localhost:5678/api/works";// ce code permet de récupérerer l'url de mon api
 let allData = [];//crée une variable appelée allDataet lui attribue une valeur initiale vide, représentée par un tableau vide ( []).
                 //Cette déclaration est utile pour initialiser une variable qui sera utilisée pour stocker des données ou accumuler des valeurs au fur et à mesure
@@ -37,38 +38,51 @@ const displayData = (data, idCat = 0) => {// const displayData est une fonction 
   gallery.insertAdjacentHTML('beforeend',img)// j'ai récupérer les éléments à partir de fiteredData en parcourant la boucle for 
     }
 }
-fetch("http://localhost:5678/api/categories")
-.then(response => {
-console.log(response.status)
-return response.json();
-})
-.then(categories => {
-// console.log(categories)
-btnCategories(categories)
-})
+
+//fonction loadCatégori
+const loadCatégories = () => {
+  fetch("http://localhost:5678/api/categories")
+  .then(response => {
+  console.log(response.status)
+  return response.json();
+  })
+  .then(categories => {
+    btnCategories(categories);
+  })
+}
+
 
 const btnCategories = (categories) => {
   console.log(categories)
   const category = document.querySelector("#portfolio .btn")
-  for ( let item of categories){
-  console.log(item.name)
-  const button =
-  `<button data-idcat="${item.id}">${item.name}</button>`
-  category.insertAdjacentHTML('beforeend',button)
+  for (let item of categories) {
+    console.log(item.name)
+    const button =
+      `<button data-idcat="${item.id}">${item.name}</button>`
+    category.insertAdjacentHTML('beforeend', button)
   }
   const buttonTous = `<button data-idcat="0">Tous</button>`
   category.insertAdjacentHTML('afterbegin', buttonTous)
   const buttonsCat = document.querySelectorAll("#portfolio .btn button")
-  const data = JSON.parse(sessionStorage.getItem('data')); 
+  const data = JSON.parse(sessionStorage.getItem('data'));
   console.log(data[0].title)//
 
-  for ( let buttonCat of buttonsCat){// buttonCat permet de parcourir tout les bouttons
-    
-  buttonCat.addEventListener("click",(e)=>{
+  for (let buttonCat of buttonsCat) {// buttonCat permet de parcourir tout les bouttons
+
+    buttonCat.addEventListener("click", (e) => {
 
       const idCat = parseInt(e.target.dataset.idcat);//parseInt=transformer une chaine de caractère en un nombre, e=evenement, target=cible, dataset= c'est un objet qui récupére tous les attribut qui commence par "data-...", et récupére l'idcat
       displayData(data, idCat)
     })
-    
-  }  
+
+  }
+  
+}
+const creatBackOffice = () => {
+
+}
+if (!token){
+  loadCatégories();
+}else {
+  creatBackOffice();
 }
