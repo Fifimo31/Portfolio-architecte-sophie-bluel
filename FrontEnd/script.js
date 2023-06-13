@@ -78,8 +78,11 @@ const btnCategories = (categories) => {
   }
   
 }
-const creatBackOffice = () => {
 
+
+const creatBackOffice = () => {
+  const edit = document.querySelector("i");
+  
 }
 if (!token){
   loadCatégories();

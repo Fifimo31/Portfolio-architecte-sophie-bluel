@@ -211,3 +211,26 @@ footer nav ul {
 	margin: 2em
 }
 
+i {
+	margin-top: 10px;
+	margin-left: 60px;
+}
+.edit {
+	display: flex;
+	
+}
+
+.edit p {
+	margin: 10px;
+}
+
+.editProjet {
+	display: flex;
+	text-align: center;
+}
+
+#portfolio h2 i {
+	color: black;
+	font-size: 15px;
+	margin-left: 30px;
+}
