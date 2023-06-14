@@ -81,11 +81,15 @@ const btnCategories = (categories) => {
 
 
 const creatBackOffice = () => {
-  const edit = document.querySelector("i");
-  
+  const edit = document.querySelector(".edit");
+  edit.insertAdjacentHTML =('afterbegin', `<i class="fa-sharp fa-regular fa-pen-to-square"></i>
+  <p>modifier</p>`);
+  console.log(edit)
 }
+
 if (!token){
   loadCatégories();
 }else {
   creatBackOffice();
 }
+
