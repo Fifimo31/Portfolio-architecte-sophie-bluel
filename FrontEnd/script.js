@@ -28,7 +28,6 @@ loadData(dataUrl)//loadData est appelé avec dataUrl comme argument pour affiche
 const displayData = (data, idCat = 0) => {// const displayData est une fonction qui retourne les images
   console.log(data)
   const gallery = document.querySelector("#portfolio .gallery")// on a récupérer l'ID est la class avec querySelector
-  gallery.innerHTML = ""; // on la donc insérer avec innerHTML ?????
   const filteredData = idCat === 0 ? allData : allData.filter(item => item.categoryId === idCat); //filtrage des donner par rapport a la catégoryId
                                                                                                   //le "?" si la valeur est vrais et les ":" si la valeur est fausse
   for ( let item of filteredData){// la boucle for of et utilisé pour parcourir des élément itérable
@@ -80,10 +79,10 @@ const btnCategories = (categories) => {
 }
 
 
+
 const creatBackOffice = () => {
-  const edit = document.querySelector(".edit");
-  edit.insertAdjacentHTML =('afterbegin', `<i class="fa-sharp fa-regular fa-pen-to-square"></i>
-  <p>modifier</p>`);
+  const edit = document.querySelector("#portfolio .edit");
+  edit.insertAdjacentHTML =('afterbegin', `<i class="fa-sharp fa-regular fa-pen-to-square"></i><p>modifier</p>`);
   console.log(edit)
 }
 
