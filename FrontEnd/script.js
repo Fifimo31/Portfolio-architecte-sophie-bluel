@@ -80,15 +80,23 @@ const btnCategories = (categories) => {
 
 
 
-const creatBackOffice = () => {
+/*const creatBackOffice = () => {
   const edit = document.querySelector("#portfolio .edit");
-  edit.insertAdjacentHTML =('afterbegin', `<i class="fa-sharp fa-regular fa-pen-to-square"></i><p>modifier</p>`);
+  edit.insertAdjacentHTML =('afterbegin', );
   console.log(edit)
+}*/
+
+const creatBackOffice = () => {
+  const edit = document.querySelector("#portfolio .editProjet");
+  
+  if (token) {
+    edit.insertAdjacentHTML('afterbegin', `<i class="fa-sharp fa-regular fa-pen-to-square"></i><p>modifier</p>`);
+  }
 }
 
 if (!token){
   loadCatégories();
-}else {
+} else {
   creatBackOffice();
 }
 
