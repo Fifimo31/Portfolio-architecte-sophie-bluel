@@ -79,19 +79,19 @@ const btnCategories = (categories) => {
 }
 
 
-
-/*const creatBackOffice = () => {
-  const edit = document.querySelector("#portfolio .edit");
-  edit.insertAdjacentHTML =('afterbegin', );
-  console.log(edit)
-}*/
-
 const creatBackOffice = () => {
   const edit = document.querySelector("#portfolio .editProjet");
-  
-  if (token) {
-    edit.insertAdjacentHTML('afterbegin', `<i class="fa-sharp fa-regular fa-pen-to-square"></i><p>modifier</p>`);
-  }
+  const editimg = document.querySelector("figure .edit")
+    if (token) {
+      edit.insertAdjacentHTML('afterbegin', `<i class="fa-sharp fa-regular fa-pen-to-square"></i><p>modifier</p>`);
+      editimg.insertAdjacentHTML('afterbegin', `<i class="fa-sharp fa-regular fa-pen-to-square"></i><p>modifier</p>`)
+      const openModal = (e) =>{ 
+        e.preventDefault()
+        const target = document.querySelector(e.target.getAttribute('href'))
+      }
+      document.querySelectorAll('.js-modal').forEach(a =>{a.addEventListener('click', openModal)})
+
+    }
 }
 
 if (!token){
