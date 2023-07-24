@@ -78,6 +78,14 @@ const btnCategories = (categories) => {
   
 }
 
+const modalimg = (data) => {
+  console.log(data)
+  const modalgallery = document.querySelector('aside .modal-wrapper .gallery1')
+  const img =
+  `<figure> <img src="${item.imageUrl}" alt="Abajour Tahina"> <figcaption>éditer</figcaption> </figure>`;
+  modalgallery.insertAdjacentHTML('beforeend', img)
+}
+
 
 const creatBackOffice = () => {
   const edit = document.querySelector("#portfolio .editProjet");
@@ -85,12 +93,7 @@ const creatBackOffice = () => {
     if (token) {
       edit.insertAdjacentHTML('afterbegin', `<i class="fa-sharp fa-regular fa-pen-to-square"></i><p>modifier</p>`);
       editimg.insertAdjacentHTML('afterbegin', `<i class="fa-sharp fa-regular fa-pen-to-square"></i><p>modifier</p>`)
-      const openModal = (e) =>{ 
-        e.preventDefault()
-        const target = document.querySelector(e.target.getAttribute('href'))
-      }
-      document.querySelectorAll('.js-modal').forEach(a =>{a.addEventListener('click', openModal)})
-
+      
     }
 }
 
