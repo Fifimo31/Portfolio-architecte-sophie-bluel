@@ -290,3 +290,14 @@ i {
     font-weight: 900;
     margin-left: 280px;
 }
+
+.gallery1 {
+	display: flex;
+	width: 350px;
+	height: 350px;
+	flex-wrap: wrap;
+}
+#introduction .gallery1 figure img {
+	width: 80px;
+	height: 80px;
+}

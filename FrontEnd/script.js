@@ -21,6 +21,7 @@ const loadData = async (dataUrl) => {//Ce code définit une fonction loadData et
                                                         //stringify est utilisée pour convertir les données JavaScript ( data) en une chaîne de caractères JSON
   allData = data;
   displayData(data);//displayData est appelé avec data comme argument pour afficher le contenue de data 
+  modalimg(data)
   })
 }
 loadData(dataUrl)//loadData est appelé avec dataUrl comme argument pour afficher le contenue de l'url
@@ -37,6 +38,22 @@ const displayData = (data, idCat = 0) => {// const displayData est une fonction 
   gallery.insertAdjacentHTML('beforeend',img)// j'ai récupérer les éléments à partir de fiteredData en parcourant la boucle for 
     }
 }
+const modalimg = (data) => {
+  const modalgallery = document.querySelector('aside .modal-wrapper .gallery1');
+
+  modalgallery.innerHTML = '';
+
+  data.forEach((item) => {
+    const img = `
+      <figure>
+        <img src="${item.imageUrl}" alt="Abajour Tahina">
+        <figcaption>éditer</figcaption>
+      </figure>
+    `;
+    modalgallery.insertAdjacentHTML('beforeend', img);
+  });
+};
+
 
 //fonction loadCatégori
 const loadCatégories = () => {
@@ -78,13 +95,7 @@ const btnCategories = (categories) => {
   
 }
 
-const modalimg = (data) => {
-  console.log(data)
-  const modalgallery = document.querySelector('aside .modal-wrapper .gallery1')
-  const img =
-  `<figure> <img src="${item.imageUrl}" alt="Abajour Tahina"> <figcaption>éditer</figcaption> </figure>`;
-  modalgallery.insertAdjacentHTML('beforeend', img)
-}
+
 
 
 const creatBackOffice = () => {
