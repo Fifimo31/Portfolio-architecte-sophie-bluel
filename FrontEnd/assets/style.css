@@ -288,16 +288,24 @@ i {
 
 .fa-solid, .fas {
     font-weight: 900;
-    margin-left: 280px;
+    margin-left: 635px;
 }
 
 .gallery1 {
 	display: flex;
-	width: 350px;
-	height: 350px;
+	width: 660px;
+	height: 620px;
 	flex-wrap: wrap;
 }
 #introduction .gallery1 figure img {
-	width: 80px;
-	height: 80px;
+	width: 124px;
+	height: 175px;
+	position: relative;
+}
+.trashCan {
+    font: var(--fa-font-solid);
+    content: "\f2ed";
+    color: white;
+    position: absolute;
+    background: black;
 }
