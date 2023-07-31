@@ -302,10 +302,8 @@ i {
 	height: 175px;
 	position: relative;
 }
-.trashCan {
+.trashCan::before {
     font: var(--fa-font-solid);
     content: "\f2ed";
-    color: white;
-    position: absolute;
-    background: black;
+  
 }
