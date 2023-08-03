@@ -305,5 +305,5 @@ i {
 .trashCan::before {
     font: var(--fa-font-solid);
     content: "\f2ed";
-  
+	
 }

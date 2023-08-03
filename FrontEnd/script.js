@@ -47,8 +47,8 @@ const modalimg = (data) => {
     const img = `
       <figure>
         <img src="${item.imageUrl}" alt="Abajour Tahina">
-        <figcaption>éditer</figcaption>
         <div class="trashCan"></div>
+        <figcaption>éditer</figcaption>
       </figure>
     `;
     modalgallery.insertAdjacentHTML('beforeend', img);
