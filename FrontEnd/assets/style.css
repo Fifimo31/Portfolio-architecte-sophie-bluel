@@ -301,6 +301,7 @@ i {
 	width: 124px;
 	height: 175px;
 	position: relative;
+	display: inline;
 }
 .trashCan::before {
     font: var(--fa-font-solid);
