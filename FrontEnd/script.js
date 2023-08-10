@@ -97,8 +97,6 @@ const btnCategories = (categories) => {
 }
 
 
-
-
 const creatBackOffice = () => {
   const edit = document.querySelector("#portfolio .editProjet");
   const editimg = document.querySelector("figure .edit")
@@ -114,4 +112,16 @@ if (!token){
 } else {
   creatBackOffice();
 }
+
+const openModal = (e) => {
+  e.preventDefault()
+  const target = document.querySelector(e.target.getAttribute('href'))
+  target.style.display = null;
+  target.removeAttribute('aria-hidden')
+  target.setAttribute('aria-modal', 'true')
+}
+
+document.querySelectorAll(".js-modal").forEach(a=> {
+  a.addEventListener('click', openModal)
+})
 

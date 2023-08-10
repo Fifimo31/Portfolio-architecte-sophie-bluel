@@ -269,6 +269,8 @@ i {
 	flex-direction: column;
 	padding: 20px;
 	border-radius: 10px;
+	width: 800px;
+	height: 870px;
 }
 .modal-wrapper input[type="submit"]{
 	font-family: 'Syne';
@@ -288,7 +290,7 @@ i {
 
 .fa-solid, .fas {
     font-weight: 900;
-    margin-left: 635px;
+    margin-left: 760px;
 }
 
 .gallery1 {
@@ -296,10 +298,12 @@ i {
 	width: 660px;
 	height: 620px;
 	flex-wrap: wrap;
+	border-bottom: 2px solid #efefef;
+	padding-bottom: 30px;
 }
 #introduction .gallery1 figure img {
-	width: 124px;
-	height: 175px;
+	width: 115px;
+	height: 165px;
 	display: inline;
 }
 .trashCan::before {
@@ -313,11 +317,15 @@ i {
     border: 2px solid black;
     border-radius: 5px;
     position: relative;
-	left: 90px;
-	top: -170px;
+	left: 85px;
+	top: -160px;
 	padding: 3px 5px 7px 3px;
 	background-color: black;
 }
 figcaption {
 	margin-top: -25px;
+}
+.flexCenter {
+	display: flex;
+	justify-content: center;
 }
