@@ -97,6 +97,8 @@ const btnCategories = (categories) => {
 }
 
 
+
+
 const creatBackOffice = () => {
   const edit = document.querySelector("#portfolio .editProjet");
   const editimg = document.querySelector("figure .edit")
@@ -114,14 +116,29 @@ if (!token){
 }
 
 const openModal = (e) => {
-  e.preventDefault()
-  const target = document.querySelector(e.target.getAttribute('href'))
-  target.style.display = null;
-  target.removeAttribute('aria-hidden')
-  target.setAttribute('aria-modal', 'true')
-}
+  e.preventDefault();
+  const target = document.querySelector(e.target.getAttribute('href'));
+
+  if (target) {
+    target.style.display = null;
+  } else {
+    console.error('Modal target element not found.');
+  }
+};
 
 document.querySelectorAll(".js-modal").forEach(a=> {
   a.addEventListener('click', openModal)
-})
+  })
+
+
+/*const openModal = (e) => {
+        e.preventDefault()
+        const target = document.querySelector(e.target.getAttribute('href'))
+        target.style.display = null;
+      }
+
+document.querySelectorAll(".js-modal").forEach(a=> {
+a.addEventListener('click', openModal)
+})*/
+
 
