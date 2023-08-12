@@ -134,12 +134,13 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 4em;
 }
 .btn {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 3em;
+	margin-top: 5em;
 }
 .btn button {
 	margin-left: 3em;
@@ -234,9 +235,8 @@ i {
 .editProjet {
 	display: flex;
 	display: flex;
-    position: absolute;
     margin-left: 630px;
-    margin-top: -60px;
+    margin-top: -150px;
 }
 
 .editProjet p {
@@ -291,6 +291,7 @@ i {
 .fa-solid, .fas {
     font-weight: 900;
     margin-left: 760px;
+	cursor: pointer;
 }
 
 .gallery1 {

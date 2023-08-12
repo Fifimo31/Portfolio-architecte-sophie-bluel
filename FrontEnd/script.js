@@ -41,8 +41,6 @@ const displayData = (data, idCat = 0) => {// const displayData est une fonction 
 const modalimg = (data) => {
   const modalgallery = document.querySelector('aside .modal-wrapper .gallery1');
 
-  modalgallery.innerHTML = '';
-
   data.forEach((item) => {
     const img = `
       <figure>
@@ -53,6 +51,9 @@ const modalimg = (data) => {
     `;
     modalgallery.insertAdjacentHTML('beforeend', img);
   });
+
+
+  
 };
 
 
@@ -117,28 +118,50 @@ if (!token){
 
 const openModal = (e) => {
   e.preventDefault();
-  const target = document.querySelector(e.target.getAttribute('href'));
+  const targetHref = e.currentTarget.getAttribute('href'); // Utiliser 'currentTarget' pour cibler l'élément a
+  const target = document.querySelector(targetHref);
+  target.style.display = null;
+};
+document.querySelectorAll(".js-modal").forEach(a => {
+a.addEventListener('click', openModal);
+});
 
-  if (target) {
-    target.style.display = null;
-  } else {
-    console.error('Modal target element not found.');
-  }
+    // Gérer la fermeture du modal
+const closeModalIcon = document.querySelector('.close-modal');
+closeModalIcon.addEventListener('click', () => {
+const modal = document.querySelector('.modal');
+modal.style.display = 'none';
+});
+
+const deleteImage = (imageUrl) => {
+  fetch(url + modalimg + imageUrl, {  // Assurez-vous d'avoir l'URL complète pour la suppression
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      // Autres en-têtes, le cas échéant
+    },
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`La suppression a échoué avec le code d'erreur : ${response.status}`);
+    }
+    // Gérer la réussite de la suppression
+    const imageElement = document.querySelector(`img[src="${imageUrl}"]`);
+    if (imageElement) {
+      imageElement.parentElement.remove();  // Supprimez le parent (figure) de l'image
+    }
+  })
+  .catch(error => {
+    console.error('Erreur lors de la suppression :', error);
+  });
 };
 
-document.querySelectorAll(".js-modal").forEach(a=> {
-  a.addEventListener('click', openModal)
-  })
-
-
-/*const openModal = (e) => {
-        e.preventDefault()
-        const target = document.querySelector(e.target.getAttribute('href'))
-        target.style.display = null;
-      }
-
-document.querySelectorAll(".js-modal").forEach(a=> {
-a.addEventListener('click', openModal)
-})*/
-
+// Gestionnaire d'événement pour la suppression
+modalgallery.addEventListener('click', (event) => {
+  if (event.target.classList.contains('trashCan')) {
+    const imageElement = event.target.previousElementSibling; // L'élément img précédent est l'image
+    const imageUrl = imageElement.getAttribute('src');
+    deleteImage(imageUrl);
+  }
+});
 
