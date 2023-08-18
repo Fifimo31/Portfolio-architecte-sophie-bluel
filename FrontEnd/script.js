@@ -38,23 +38,9 @@ const displayData = (data, idCat = 0) => {// const displayData est une fonction 
   gallery.insertAdjacentHTML('beforeend',img)// j'ai récupérer les éléments à partir de fiteredData en parcourant la boucle for 
     }
 }
-const modalimg = (data) => {
-  const modalgallery = document.querySelector('aside .modal-wrapper .gallery1');
-
-  data.forEach((item) => {
-    const img = `
-      <figure>
-        <img src="${item.imageUrl}" alt="Abajour Tahina">
-        <div class="framIcon trashCan"></div>
-        <figcaption>éditer</figcaption>
-      </figure>
-    `;
-    modalgallery.insertAdjacentHTML('beforeend', img);
-  });
 
 
-  
-};
+
 
 
 //fonction loadCatégori
@@ -98,8 +84,6 @@ const btnCategories = (categories) => {
 }
 
 
-
-
 const creatBackOffice = () => {
   const edit = document.querySelector("#portfolio .editProjet");
   const editimg = document.querySelector("figure .edit")
@@ -134,11 +118,10 @@ modal.style.display = 'none';
 });
 
 const deleteImage = (imageUrl) => {
-  fetch(url + modalimg + imageUrl, {  // Assurez-vous d'avoir l'URL complète pour la suppression
+  fetch("http://localhost:5678/api/works/1" + imageUrl, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      // Autres en-têtes, le cas échéant
     },
   })
   .then(response => {
@@ -156,12 +139,29 @@ const deleteImage = (imageUrl) => {
   });
 };
 
-// Gestionnaire d'événement pour la suppression
-modalgallery.addEventListener('click', (event) => {
+
+const modalgallery = document.querySelector('aside .modal-wrapper .gallery1');
+const modalimg = (data) => {
+  
+  data.forEach((item) => {
+    const img = `
+      <figure>
+        <img src="${item.imageUrl}" alt="Abajour Tahina">
+        <div class="framIcon trashCan"></div>
+        <figcaption>éditer</figcaption>
+      </figure>
+    `;
+    modalgallery.insertAdjacentHTML('beforeend', img);
+  });
+
+  modalgallery.addEventListener('click', (event) => {
   if (event.target.classList.contains('trashCan')) {
     const imageElement = event.target.previousElementSibling; // L'élément img précédent est l'image
     const imageUrl = imageElement.getAttribute('src');
     deleteImage(imageUrl);
-  }
-});
+    }
+  })
+};
+// ...
+
 
