@@ -117,35 +117,12 @@ const modal = document.querySelector('.modal');
 modal.style.display = 'none';
 });
 
-const deleteImage = (imageUrl) => {
-  fetch("http://localhost:5678/api/works/1" + imageUrl, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`La suppression a échoué avec le code d'erreur : ${response.status}`);
-    }
-    // Gérer la réussite de la suppression
-    const imageElement = document.querySelector(`img[src="${imageUrl}"]`);
-    if (imageElement) {
-      imageElement.parentElement.remove();  // Supprimez le parent (figure) de l'image
-    }
-  })
-  .catch(error => {
-    console.error('Erreur lors de la suppression :', error);
-  });
-};
-
-
 const modalgallery = document.querySelector('aside .modal-wrapper .gallery1');
+
 const modalimg = (data) => {
-  
-  data.forEach((item) => {
+  data.forEach((item, index) => {
     const img = `
-      <figure>
+      <figure data-index="${index}">
         <img src="${item.imageUrl}" alt="Abajour Tahina">
         <div class="framIcon trashCan"></div>
         <figcaption>éditer</figcaption>
@@ -155,13 +132,48 @@ const modalimg = (data) => {
   });
 
   modalgallery.addEventListener('click', (event) => {
-  if (event.target.classList.contains('trashCan')) {
-    const imageElement = event.target.previousElementSibling; // L'élément img précédent est l'image
-    const imageUrl = imageElement.getAttribute('src');
-    deleteImage(imageUrl);
+    if (event.target.classList.contains('trashCan')) {
+      const figureElement = event.target.closest('figure');
+      const dataIndex = parseInt(figureElement.getAttribute('data-index'));
+      const imageElement = figureElement.querySelector('img');
+      const imageUrl = imageElement.getAttribute('src');
+      deleteImage(dataIndex, imageUrl);
+    }
+  });
+};
+
+
+const deleteImage = (dataIndex, imageUrl) => {
+const token = sessionStorage.getItem('token');
+console.log(dataIndex)
+
+  fetch("http://localhost:5678/api/works/1" + encodeURIComponent(imageUrl), {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`La suppression a échoué avec le code d'erreur : ${response.status}`);
+    }
+    // Gérer la réussite de la suppression
+    const figureElement = modalgallery.querySelector(`figure[data-index="${dataIndex}"]`);
+    if (figureElement) {
+      figureElement.remove(); // Supprimez la figure de l'image
     }
   })
+  .catch(error => {
+    console.error('Erreur lors de la suppression :', error);
+  });
 };
-// ...
-
-
+modalgallery.addEventListener('click', (event) => {
+  if (event.target.classList.contains('trashCan')) {
+    const figureElement = event.target.closest('figure'); // Trouver le parent <figure> le plus proche
+    const dataIndex = parseInt(figureElement.getAttribute('data-index'));
+    const imageElement = figureElement.querySelector('img');
+    const imageUrl = imageElement.getAttribute('src');
+    deleteImage(dataIndex, imageUrl);
+  }
+});
