@@ -40,9 +40,6 @@ const displayData = (data, idCat = 0) => {// const displayData est une fonction 
 }
 
 
-
-
-
 //fonction loadCatégori
 const loadCatégories = () => {
   fetch("http://localhost:5678/api/categories")
@@ -164,9 +161,7 @@ console.log(dataIndex)
       figureElement.remove(); // Supprimez la figure de l'image
     }
   })
-  .catch(error => {
-    console.error('Erreur lors de la suppression :', error);
-  });
+  
 };
 modalgallery.addEventListener('click', (event) => {
   if (event.target.classList.contains('trashCan')) {
