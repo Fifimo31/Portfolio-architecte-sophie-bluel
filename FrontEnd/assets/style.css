@@ -302,8 +302,9 @@ i {
     font-weight: 900;
     margin-left: -35px;
 	cursor: pointer;
-	position: absolute;
-	top: 38px;
+	position: relative;
+	top: -35px;
+	left: -385px;
 }
 
 .gallery1 {
@@ -341,6 +342,7 @@ figcaption {
 .flexCenter {
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 }
 #ajouterPhoto {
 	width: 575px;
@@ -396,4 +398,30 @@ figcaption {
 	border-radius: 10px;
 	width: 800px;
 	height: 870px;
+	align-items: center;
+}
+
+.modal-wrapper1 input {
+	width: 575px;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.modal-wrapper1 label {
+	margin: 2em 0 1em 0;
+	width: 575px;
+}
+.modal-wrapper1 textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.angle-down::before {
+	font: var(--fa-font-solid);
+    content: "\f107";
+	font-size: 20px;
+	position: relative;
+	top: -44px;
+	right: -475px;
 }
