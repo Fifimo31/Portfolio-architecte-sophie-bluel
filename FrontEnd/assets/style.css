@@ -289,6 +289,18 @@ i {
 	color: red;
 }
 
+.modal-wrapper1 input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #bbc1c5;
+	margin : 2em auto ;
+	width: 225px;
+	height: 35px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
 .fa-solid, .fas {
 	font-size: 25px;
     font-weight: 900;
@@ -315,6 +327,13 @@ i {
 	border-bottom: 2px solid #efefef;
 	padding-bottom: 30px;
 }
+
+.Photo {
+	border-bottom: 2px solid #efefef;
+	padding-bottom: 30px;
+	width: 575px;
+}
+
 #introduction .gallery1 figure img {
 	width: 115px;
 	height: 165px;
@@ -340,6 +359,10 @@ figcaption {
 	margin-top: -25px;
 }
 .flexCenter {
+	display: flex;
+	justify-content: center;
+}
+.flexCenter1 {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
