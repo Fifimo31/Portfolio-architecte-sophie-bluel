@@ -26,18 +26,18 @@ const loadData = async (dataUrl) => {//Ce code définit une fonction loadData et
 }
 loadData(dataUrl)//loadData est appelé avec dataUrl comme argument pour afficher le contenue de l'url
 
-const displayData = (data, idCat = 0) => {// const displayData est une fonction qui retourne les images
+const displayData = (data, categoryId = 0) => {
   console.log(data)
-  const gallery = document.querySelector("#portfolio .gallery")// on a récupérer l'ID est la class avec querySelector
-  const filteredData = idCat === 0 ? allData : allData.filter(item => item.categoryId === idCat); //filtrage des donner par rapport a la catégoryId
-                                                                                                  //le "?" si la valeur est vrais et les ":" si la valeur est fausse
-  for ( let item of filteredData){// la boucle for of et utilisé pour parcourir des élément itérable
-  console.log()
-  const img =
-  `<figure> <img src="${item.imageUrl}" alt="Abajour Tahina"> <figcaption>${item.title}</figcaption> </figure>`;
-  gallery.insertAdjacentHTML('beforeend',img)// j'ai récupérer les éléments à partir de fiteredData en parcourant la boucle for 
-    }
-}
+  const gallery = document.querySelector("#portfolio .gallery");
+  const filteredData = categoryId === 0 ? allData : allData.filter(item => item.categories === categoryId);
+
+  gallery.innerHTML = "";
+
+  for (let item of filteredData) {
+    const img = `<figure><img src="${item.imageUrl}" alt="Abajour Tahina"><figcaption>${item.title}</figcaption></figure>`;
+    gallery.insertAdjacentHTML('beforeend', img);
+  }
+};
 
 
 //fonction loadCatégori
@@ -80,6 +80,29 @@ const btnCategories = (categories) => {
   
 }
 
+/*const btnCategories = (categories) => {
+  const category = document.querySelector("#portfolio .btn");
+
+  for (let item of categories) {
+    const button = `<button data-idcat="${item.id}">${item.name}</button>`;
+    category.insertAdjacentHTML('beforeend', button);
+  }
+
+  const buttonTous = `<button data-idcat="0">Tous</button>`;
+  category.insertAdjacentHTML('afterbegin', buttonTous);
+
+  const buttonsCat = document.querySelectorAll("#portfolio .btn button");
+  const data = JSON.parse(sessionStorage.getItem('data'));
+
+  for (let buttonCat of buttonsCat) {
+    buttonCat.addEventListener("click", (e) => {
+      const idCat = parseInt(e.target.dataset.idcat);
+      displayData(data, idCat);
+    });
+  }
+};
+
+*/
 
 const creatBackOffice = () => {
   const edit = document.querySelector("#portfolio .editProjet");
