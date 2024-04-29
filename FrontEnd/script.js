@@ -26,15 +26,19 @@ const loadData = async (dataUrl) => {//Ce code définit une fonction loadData et
 }
 loadData(dataUrl)//loadData est appelé avec dataUrl comme argument pour afficher le contenue de l'url
 
+
 const displayData = (data, categoryId = 0) => {
-  console.log(data)
   const gallery = document.querySelector("#portfolio .gallery");
-  const filteredData = categoryId === 0 ? allData : allData.filter(item => item.categories === categoryId);
+  let filteredData = data;
+
+  if (categoryId !== 0) {
+    filteredData = data.filter(item => item.category.id === categoryId);
+  }
 
   gallery.innerHTML = "";
 
   for (let item of filteredData) {
-    const img = `<figure><img src="${item.imageUrl}" alt="Abajour Tahina"><figcaption>${item.title}</figcaption></figure>`;
+    const img = `<figure><img src="${item.imageUrl}" alt="${item.title}"><figcaption>${item.title}</figcaption></figure>`;
     gallery.insertAdjacentHTML('beforeend', img);
   }
 };
@@ -80,29 +84,6 @@ const btnCategories = (categories) => {
   
 }
 
-/*const btnCategories = (categories) => {
-  const category = document.querySelector("#portfolio .btn");
-
-  for (let item of categories) {
-    const button = `<button data-idcat="${item.id}">${item.name}</button>`;
-    category.insertAdjacentHTML('beforeend', button);
-  }
-
-  const buttonTous = `<button data-idcat="0">Tous</button>`;
-  category.insertAdjacentHTML('afterbegin', buttonTous);
-
-  const buttonsCat = document.querySelectorAll("#portfolio .btn button");
-  const data = JSON.parse(sessionStorage.getItem('data'));
-
-  for (let buttonCat of buttonsCat) {
-    buttonCat.addEventListener("click", (e) => {
-      const idCat = parseInt(e.target.dataset.idcat);
-      displayData(data, idCat);
-    });
-  }
-};
-
-*/
 
 const creatBackOffice = () => {
   const edit = document.querySelector("#portfolio .editProjet");
