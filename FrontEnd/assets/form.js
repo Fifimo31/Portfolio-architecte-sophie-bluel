@@ -30,7 +30,7 @@ formAdmin.addEventListener("submit", (e) => {
       console.log(json)
       sessionStorage.setItem('token', json.token)
       if(json.token) {
-      window.location.href = "http://127.0.0.1:5501/FrontEnd/index.html" } 
+      window.location.href = "http://127.0.0.1:5500/Portfolio-architecte-sophie-bluel/FrontEnd/index.html" } 
       else {json.message} 
 
     });

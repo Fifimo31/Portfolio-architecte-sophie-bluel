@@ -15,7 +15,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, select {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -263,7 +263,7 @@ i {
 	background: rgba(0, 0, 0, 0.5);
 }
 
-.modal-wrapper {
+/*.modal-wrapper {
 	
 	background-color: #fff;
 	display: flex;
@@ -272,7 +272,19 @@ i {
 	border-radius: 10px;
 	width: 800px;
 	height: 870px;
-}
+}*/
+
+.modal-wrapper {
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	border-radius: 10px;
+	width: 800px;
+	max-height: 80vh; /* 80% de la hauteur de la fenêtre de visualisation */
+	overflow-y: auto; /* Affiche une barre de défilement si le contenu est plus long que max-height */
+  }
+  
 .modal-wrapper input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -422,6 +434,8 @@ figcaption {
 	width: 800px;
 	height: 870px;
 	align-items: center;
+	max-height: 80vh; /* 80% de la hauteur de la fenêtre de visualisation */
+	overflow-y: auto; 
 }
 
 .modal-wrapper1 input {
@@ -435,6 +449,23 @@ figcaption {
 	margin: 2em 0 1em 0;
 	width: 575px;
 }
+
+.modal-wrapper1 select {
+	width: 575px;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding-left: 10px;
+}
+
+
+#addImageForm select#categorie {
+	
+	padding: 10px;
+  }
+  
+  
 .modal-wrapper1 textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);

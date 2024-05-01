@@ -101,22 +101,40 @@ if (!token){
   creatBackOffice();
 }
 
+
 const openModal = (e) => {
   e.preventDefault();
   const targetHref = e.currentTarget.getAttribute('href'); // Utiliser 'currentTarget' pour cibler l'élément a
   const target = document.querySelector(targetHref);
   target.style.display = null;
 };
-document.querySelectorAll(".js-modal").forEach(a => {
-a.addEventListener('click', openModal);
+document.querySelectorAll('.js-modal').forEach(modalTrigger => {
+  modalTrigger.addEventListener('click', openModal);
 });
 
-    // Gérer la fermeture du modal
-const closeModalIcon = document.querySelector('.close-modal');
-closeModalIcon.addEventListener('click', () => {
-const modal = document.querySelector('.modal');
-modal.style.display = 'none';
+
+
+const openModalForm = (e) => {
+  e.preventDefault();
+  const targetHref = e.currentTarget.getAttribute('href'); // Utiliser 'currentTarget' pour cibler l'élément a
+  const target = document.querySelector(targetHref);
+  target.style.display = null;
+};
+document.querySelectorAll('.js-modalForm').forEach(modalFormTrigger => {
+  modalFormTrigger.addEventListener('click', openModalForm);
 });
+
+document.querySelectorAll('.close-modal').forEach(closeIcon => {
+  closeIcon.addEventListener('click',(event) => {
+    // Utiliser `event.currentTarget` pour cibler correctement l'élément qui a déclenché l'événement
+    const modal = event.currentTarget.closest('.modal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+
+
 
 const modalgallery = document.querySelector('aside .modal-wrapper .gallery1');
 
@@ -176,3 +194,83 @@ modalgallery.addEventListener('click', (event) => {
     deleteImage(dataIndex, imageUrl);
   }
 });
+
+const addImageForm = document.getElementById('addImageForm'); // Assurez-vous que le formulaire a cet id
+
+addImageForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // Ici vous collectez les données du formulaire
+  // Pour l'exemple, je suppose que vous avez un champ de formulaire pour l'image et les autres détails
+  const formData = new FormData(addImageForm);
+  formData.append('title', document.getElementById('titre').value);
+  formData.append('categorie', document.getElementById('categorie').value);
+  
+  fetch('http://localhost:5678/api/works', {
+    method: 'POST',
+    body: formData, // formData sera rempli avec les données de l'image et les autres champs
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    // Ici vous mettriez à jour le DOM pour inclure la nouvelle image ou rafraîchir la galerie
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+});
+
+// Après l'ajout d'une image
+then(data => {
+  // Ajouter l'image au DOM
+  const newImageHtml = `<figure><img src="${data.imageUrl}" alt="${data.title}"><figcaption>${data.title}</figcaption></figure>`;
+  document.querySelector("#portfolio .gallery").insertAdjacentHTML('beforeend', newImageHtml);
+  // Fermer le modal ici si nécessaire
+})
+
+// Après la suppression d'une image
+.then(() => {
+  // Supprimer l'image du DOM
+  const figureElement = document.querySelector(`figure[data-index="${dataIndex}"]`);
+  if (figureElement) {
+    figureElement.remove();
+  }
+})
+// Sélectionner l'élément avec la classe 'arrow-left' dans 'modal-wrapper1'
+const backArrow = document.querySelector('.modal-wrapper1 .arrow-left');
+
+// Ajouter un gestionnaire d'événements 'click' à cet élément
+backArrow.addEventListener('click', function() {
+  // Fermer le modal-wrapper1
+  document.getElementById('modalForm').style.display = 'none';
+  
+  // Ouvrir le modal-wrapper
+  document.getElementById('modal1').style.display = 'block';
+});
+
+document.getElementById('addImageForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const token = sessionStorage.getItem('token');
+
+  fetch('http://localhost:5678/api/works', {
+    method: 'POST',
+    body: formData, // formData contient l'image et les autres champs
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    // Ajoutez ici la logique pour ajouter l'image dans le DOM si nécessaire
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+});
+
