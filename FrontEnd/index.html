@@ -51,13 +51,8 @@
 							<i class="fa-solid fa-xmark close-modal"></i>
 							<i class="arrow-left"></i>
 							<h3>Ajout photo</h3>
-							<div class="flexCenter1">
-								<div class="Photo">
-									<div id="ajouterPhoto">
-										<i class="image"></i>
-										<input type="submit" value="+ Ajouter photo">
-									<p>jpg, png : 4mo max</p>
-								</div>
+							
+								
 								<!--<form action="#" method="post" id="addImageForm" enctype="multipart/form-data">
 									<label for="titre">Titre</label>
 									<input type="text" name="titre" id="titre">
@@ -73,26 +68,37 @@
 								</form>-->
 
 								<form action="#" method="post" id="addImageForm" enctype="multipart/form-data">
-									<label for="image">Image</label>
-									<input type="file" name="image" id="image" accept="image/png, image/jpeg">
-								  
-									<label for="titre">Titre</label>
-									<input type="text" name="titre" id="titre">
-								  
-									<label for="categorie">Catégorie</label>
-									<select name="categorie" id="categorie">
-									  <option value=""></option>
-									  <option value="categorie1">Objets</option>
-									  <option value="categorie2">Appartements</option>
-									  <option value="categorie3">Hôtels & restaurants</option>
-									</select>
-								  
+									<div class="flexCenter1">
+										<label for="image">
+											
+											<div class="Photo">
+												<div id="ajouterPhoto">
+													<i class="image"></i>
+													<input type="submit" value="+ Ajouter photo">
+												<p>jpg, png : 4mo max</p>
+											</div>
+											
+										</label>
+									
+										<input type="file" name="image" id="image" accept="image/png, image/jpeg">
+									
+										<label for="titre">Titre</label>
+										<input type="text" name="titre" id="titre">
+									
+										<label for="categorie">Catégorie</label>
+										<select name="categorie" id="categorie">
+										<option value=""></option>
+										<option value="categorie1">Objets</option>
+										<option value="categorie2">Appartements</option>
+										<option value="categorie3">Hôtels & restaurants</option>
+										</select>
+									</div>
 									<input type="submit" value="valider">
-								  </form>
+								</form>
 								  
 
-							</div>
-							<input type="submit" value="valider">
+							
+							
 						</div>
 					</aside>
 				</div>
