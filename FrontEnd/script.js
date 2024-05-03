@@ -124,16 +124,31 @@ document.querySelectorAll('.js-modalForm').forEach(modalFormTrigger => {
   modalFormTrigger.addEventListener('click', openModalForm);
 });
 
-document.querySelectorAll('.close-modal').forEach(closeIcon => {
-  closeIcon.addEventListener('click',(event) => {
-    // Utiliser `event.currentTarget` pour cibler correctement l'élément qui a déclenché l'événement
-    const modal = event.currentTarget.closest('.modal');
+// Sélectionne le premier élément avec la classe 'arrow-left'
+const returnIcon = document.querySelector('.arrow-left');
+if (returnIcon) {
+  // Ajoute un gestionnaire d'événement 'click' à l'icône de retour
+  returnIcon.addEventListener('click', (event) => {
+    // Utilise `event.currentTarget` pour cibler correctement l'élément qui a déclenché l'événement
+    const modal = event.currentTarget.closest('.modal'); // Trouve le parent le plus proche avec la classe 'modal'
     if (modal) {
-      modal.style.display = 'none';
+      modal.style.display = 'none'; // Masque le modal si trouvé
     }
   });
-});
+}
 
+
+document.querySelectorAll('.close-modal').forEach(closeIcon => {
+  closeIcon.addEventListener('click', (event) => {
+    // Sélectionne tous les éléments avec la classe 'modal'
+    const modals = document.querySelectorAll('.modal');
+    // Itère sur chaque modal pour appliquer une modification
+    modals.forEach(modal => {
+      // Par exemple, pour masquer tous les modals
+      modal.style.display = 'none';
+    });
+  });
+});
 
 
 const modalgallery = document.querySelector('aside .modal-wrapper .gallery1');
@@ -195,7 +210,7 @@ modalgallery.addEventListener('click', (event) => {
   }
 });
 
-const addImageForm = document.getElementById('addImageForm'); // Assurez-vous que le formulaire a cet id
+/*const addImageForm = document.getElementById('addImageForm'); // Assurez-vous que le formulaire a cet id
 
 addImageForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -251,7 +266,7 @@ backArrow.addEventListener('click', function() {
   document.getElementById('modal1').style.display = 'block';
 });
 
-document.getElementById('addImageForm').addEventListener('submit', function(e) {
+document.getElementById('addImageForm').addEventListener('file',(e) => {
   e.preventDefault();
 
   const formData = new FormData(this);
@@ -272,5 +287,73 @@ document.getElementById('addImageForm').addEventListener('submit', function(e) {
   .catch((error) => {
     console.error('Error:', error);
   });
+});*//*
+const ajoutImage = document.querySelector('#modalForm label .Photo');
+const  previewFile = () => {
+  let preview = document.querySelector('#image');
+  let file    = document.querySelector('input[type=file]').files[0];
+  let reader  = new FileReader();
+
+  reader.onloadend = () => {
+    preview.src = reader.result;
+  }
+
+  if (file) {
+    
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+  ajoutImage.insertAdjacentHTML('~#image')
+  
+}*/
+
+const inputImage = document.querySelector('input[type=file]');
+const previewImage = document.querySelector('#ajouterPhoto'); // Assurez-vous que cet ID est correct
+
+inputImage.addEventListener('change', () => {
+  const file = inputImage.files[0];
+  if (file) {
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      previewImage.src = reader.result; // Affiche l'image lue
+    };
+    
+    reader.readAsDataURL(file);
+  } else {
+    previewImage.src = ""; // Efface l'aperçu si aucun fichier n'est sélectionné
+  }
+});
+
+
+const addImageForm = document.getElementById('addImageForm');
+
+addImageForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(addImageForm);
+    formData.append('title', document.getElementById('titre').value);
+    formData.append('categorie', document.getElementById('categorie').value);
+    
+    fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Ajouter l'image au DOM pour la voir directement
+        const newImageHtml = `<figure><img src="${data.imageUrl}" alt="${data.title}"><figcaption>${data.title}</figcaption></figure>`;
+        document.querySelector("#portfolio .gallery").insertAdjacentHTML('beforeend', newImageHtml);
+        // Fermer le modal ici si nécessaire
+        document.getElementById('modalForm').style.display = 'none';
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 });
 

@@ -10,6 +10,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 </head>
 <body>
 
@@ -51,22 +54,6 @@
 							<i class="fa-solid fa-xmark close-modal"></i>
 							<i class="arrow-left"></i>
 							<h3>Ajout photo</h3>
-							
-								
-								<!--<form action="#" method="post" id="addImageForm" enctype="multipart/form-data">
-									<label for="titre">Titre</label>
-									<input type="text" name="titre" id="titre">
-									
-									<label for="categorie">Catégorie</label>
-									<select name="categorie" id="categorie">
-										<option value=""></option>
-										<option value="categorie1">Objets</option>
-										<option value="categorie2">Appartements</option>
-										<option value="categorie3">Hôtels & restaurants</option>
-									</select>
-									
-								</form>-->
-
 								<form action="#" method="post" id="addImageForm" enctype="multipart/form-data">
 									<div class="flexCenter1">
 										<label for="image">
@@ -79,8 +66,9 @@
 											</div>
 											
 										</label>
-									
-										<input type="file" name="image" id="image" accept="image/png, image/jpeg">
+										<input type="file" onchange="previewFile()" name="image" id="image" accept="image/png, image/jpeg">
+										
+										<!--<input type="file" name="image" id="image" accept="image/png, image/jpeg">-->
 									
 										<label for="titre">Titre</label>
 										<input type="text" name="titre" id="titre">
@@ -94,6 +82,8 @@
 										</select>
 									</div>
 									<input type="submit" value="valider">
+									<input type="submit" value="valider" style="display: none;" class="btn">
+									
 								</form>
 								  
 

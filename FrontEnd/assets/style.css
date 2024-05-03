@@ -262,16 +262,6 @@ i {
 	background: rgba(0, 0, 0, 0.5);
 }
 
-/*.modal-wrapper {
-	
-	background-color: #fff;
-	display: flex;
-	flex-direction: column;
-	padding: 20px;
-	border-radius: 10px;
-	width: 800px;
-	height: 870px;
-}*/
 
 .modal-wrapper {
 	background-color: #fff;
@@ -305,6 +295,19 @@ i {
 	font-weight: 700;
 	color: white;
 	background-color: #bbc1c5;
+	margin : 2em auto;
+	width: 225px;
+	height: 35px;
+	border-radius: 60px ;
+	display: flex;
+	justify-content: center;
+}
+
+.modal-wrapper1 input[type="submit"] .btn{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #086bac;
 	margin : 2em auto;
 	width: 225px;
 	height: 35px;
