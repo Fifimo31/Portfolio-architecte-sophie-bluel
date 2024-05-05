@@ -54,19 +54,20 @@
 							<i class="fa-solid fa-xmark close-modal"></i>
 							<i class="arrow-left"></i>
 							<h3>Ajout photo</h3>
-								<form action="#" method="post" id="addImageForm" enctype="multipart/form-data">
+								<form action="#" method="post" id="uploadForm" id="addImageForm" enctype="multipart/form-data">
 									<div class="flexCenter1">
 										<label for="image">
 											
 											<div class="Photo">
 												<div id="ajouterPhoto">
 													<i class="image"></i>
+													<input type="file" onchange="previewFile()" name="image" id="image" accept="image/png, image/jpeg">
 													<h4>+ Ajouter photo</h4>
 												<p>jpg, png : 4mo max</p>
 											</div>
 											
 										</label>
-										<input type="file" onchange="previewFile()" name="image" id="image" accept="image/png, image/jpeg">
+										
 										
 										<!--<input type="file" name="image" id="image" accept="image/png, image/jpeg">-->
 									
@@ -74,11 +75,11 @@
 										<input type="text" name="titre" id="titre">
 									
 										<label for="categorie">Catégorie</label>
-										<select name="categorie" id="categorie">
+										<select name="categorie" id="categoryId">
 										<option value=""></option>
-										<option value="categorie1">Objets</option>
-										<option value="categorie2">Appartements</option>
-										<option value="categorie3">Hôtels & restaurants</option>
+										<option id="1" name="Objets">Objets</option>
+										<option id="2" name="Appartements">Appartements</option>
+										<option id="3" name="Hotels & restaurants">Hôtels & restaurants</option>
 										</select>
 									</div>
 									<input type="submit" value="valider">

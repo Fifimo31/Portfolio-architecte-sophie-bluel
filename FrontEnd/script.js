@@ -210,150 +210,108 @@ modalgallery.addEventListener('click', (event) => {
   }
 });
 
-/*const addImageForm = document.getElementById('addImageForm'); // Assurez-vous que le formulaire a cet id
+function previewFile() {
+  const previewContainer = document.querySelector('#ajouterPhoto'); // Assurez-vous que cet ID est correct
+  const file = document.querySelector('input[type=file]').files[0]; // Obtient le fichier depuis l'input
 
-addImageForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  // Ici vous collectez les données du formulaire
-  // Pour l'exemple, je suppose que vous avez un champ de formulaire pour l'image et les autres détails
-  const formData = new FormData(addImageForm);
-  formData.append('title', document.getElementById('titre').value);
-  formData.append('categorie', document.getElementById('categorie').value);
-  
-  fetch('http://localhost:5678/api/works', {
-    method: 'POST',
-    body: formData, // formData sera rempli avec les données de l'image et les autres champs
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-    // Ici vous mettriez à jour le DOM pour inclure la nouvelle image ou rafraîchir la galerie
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-});
-
-// Après l'ajout d'une image
-then(data => {
-  // Ajouter l'image au DOM
-  const newImageHtml = `<figure><img src="${data.imageUrl}" alt="${data.title}"><figcaption>${data.title}</figcaption></figure>`;
-  document.querySelector("#portfolio .gallery").insertAdjacentHTML('beforeend', newImageHtml);
-  // Fermer le modal ici si nécessaire
-})
-
-// Après la suppression d'une image
-.then(() => {
-  // Supprimer l'image du DOM
-  const figureElement = document.querySelector(`figure[data-index="${dataIndex}"]`);
-  if (figureElement) {
-    figureElement.remove();
-  }
-})
-// Sélectionner l'élément avec la classe 'arrow-left' dans 'modal-wrapper1'
-const backArrow = document.querySelector('.modal-wrapper1 .arrow-left');
-
-// Ajouter un gestionnaire d'événements 'click' à cet élément
-backArrow.addEventListener('click', function() {
-  // Fermer le modal-wrapper1
-  document.getElementById('modalForm').style.display = 'none';
-  
-  // Ouvrir le modal-wrapper
-  document.getElementById('modal1').style.display = 'block';
-});
-
-document.getElementById('addImageForm').addEventListener('file',(e) => {
-  e.preventDefault();
-
-  const formData = new FormData(this);
-  const token = sessionStorage.getItem('token');
-
-  fetch('http://localhost:5678/api/works', {
-    method: 'POST',
-    body: formData, // formData contient l'image et les autres champs
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-    // Ajoutez ici la logique pour ajouter l'image dans le DOM si nécessaire
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-});*//*
-const ajoutImage = document.querySelector('#modalForm label .Photo');
-const  previewFile = () => {
-  let preview = document.querySelector('#image');
-  let file    = document.querySelector('input[type=file]').files[0];
-  let reader  = new FileReader();
-
-  reader.onloadend = () => {
-    preview.src = reader.result;
-  }
-
-  if (file) {
-    
-    reader.readAsDataURL(file);
-  } else {
-    preview.src = "";
-  }
-  ajoutImage.insertAdjacentHTML('~#image')
-  
-}*/
-
-const inputImage = document.querySelector('input[type=file]');
-const previewImage = document.querySelector('#ajouterPhoto'); // Assurez-vous que cet ID est correct
-
-inputImage.addEventListener('change', () => {
-  const file = inputImage.files[0];
   if (file) {
     const reader = new FileReader();
     
-    reader.onloadend = () => {
-      previewImage.src = reader.result; // Affiche l'image lue
+    reader.onloadend = function() {
+      // Vérifie si une image est déjà présente dans le conteneur
+      let imgElement = previewContainer.querySelector('img');
+      if (!imgElement) {
+        // Si aucune image n'existe, crée une nouvelle
+        imgElement = document.createElement('img');
+        previewContainer.appendChild(imgElement);
+      }
+      imgElement.src = reader.result; // Affiche l'image lue
     };
     
     reader.readAsDataURL(file);
   } else {
-    previewImage.src = ""; // Efface l'aperçu si aucun fichier n'est sélectionné
+    // Efface l'image si aucun fichier n'est sélectionné
+    const imgElement = previewContainer.querySelector('img');
+    if (imgElement) {
+      imgElement.src = "";
+    }
   }
-});
+}
 
 
+
+/*
 const addImageForm = document.getElementById('addImageForm');
 
 addImageForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
+    
     const formData = new FormData(addImageForm);
     formData.append('title', document.getElementById('titre').value);
-    formData.append('categorie', document.getElementById('categorie').value);
+    formData.append('category', document.getElementById('categorie').value);
     
     fetch('http://localhost:5678/api/works', {
         method: 'POST',
         body: formData,
         headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
         },
     })
-    .then(response => response.json())
+
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Server responded with an error: ' + response.statusText);
+        }
+        return response.json();
+    })
     .then(data => {
-        console.log('Success:', data);
-        // Ajouter l'image au DOM pour la voir directement
-        const newImageHtml = `<figure><img src="${data.imageUrl}" alt="${data.title}"><figcaption>${data.title}</figcaption></figure>`;
-        document.querySelector("#portfolio .gallery").insertAdjacentHTML('beforeend', newImageHtml);
-        // Fermer le modal ici si nécessaire
-        document.getElementById('modalForm').style.display = 'none';
+        if (data.imageUrl) {
+            const newImageHtml = `<figure><img src="${data.imageUrl}" alt="${data.title}"><figcaption>${data.title}</figcaption></figure>`;
+            document.querySelector(".modal-wrapper .gallery1").insertAdjacentHTML('beforeend', newImageHtml);
+        } else {
+            console.log('No image URL provided:', data);
+        }
     })
     .catch((error) => {
         console.error('Error:', error);
     });
+});*/
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  var formData = new FormData(this);
+  
+  // Assure-toi que 'title' et 'category' correspondent aux attentes de l'API
+  formData.append('title', document.getElementById('titre').value);
+  // Convertis l'ID de catégorie en nombre si nécessaire
+  formData.append('categoryId', parseInt(document.getElementById('categoryId').value));
+
+  // Pour afficher les valeurs de FormData dans la console
+  for (var pair of formData.entries()) {
+    console.log(pair[0]+ ': ' + pair[1]); 
+  }
+
+  fetch('http://localhost:5678/api/works', {
+      method: 'POST',
+      body: formData,
+      headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}` // Assure-toi que le token est correctement géré
+      }
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+  })
+  .then(data => {
+      console.log('Success:', data);
+      alert('Image et données enregistrées avec succès !');
+  })
+  .catch(error => {
+      console.error('Error:', error);
+      alert('Erreur lors de l’envoi des données');
+  });
 });
+
 

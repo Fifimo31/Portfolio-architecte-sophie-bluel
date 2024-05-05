@@ -393,6 +393,7 @@ figcaption {
 	flex-direction: column;
 	text-align: center;
 	margin-bottom: 60px;
+	position: relative;
 }
 
 .image::before {
@@ -505,5 +506,11 @@ h4 {
 	cursor: pointer;
 	display: grid;
 	padding-top: 20px;
+}
+label #ajouterPhoto img{
+	width: 115px;
+    height: 165px;
+    position: absolute;
+	padding-left: 229px;
 }
 
