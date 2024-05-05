@@ -239,43 +239,6 @@ function previewFile() {
 }
 
 
-
-/*
-const addImageForm = document.getElementById('addImageForm');
-
-addImageForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(addImageForm);
-    formData.append('title', document.getElementById('titre').value);
-    formData.append('category', document.getElementById('categorie').value);
-    
-    fetch('http://localhost:5678/api/works', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
-        },
-    })
-
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Server responded with an error: ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.imageUrl) {
-            const newImageHtml = `<figure><img src="${data.imageUrl}" alt="${data.title}"><figcaption>${data.title}</figcaption></figure>`;
-            document.querySelector(".modal-wrapper .gallery1").insertAdjacentHTML('beforeend', newImageHtml);
-        } else {
-            console.log('No image URL provided:', data);
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-});*/
 document.getElementById('uploadForm').addEventListener('submit', function(event) {
   event.preventDefault();
 
@@ -284,14 +247,16 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
   // Assure-toi que 'title' et 'category' correspondent aux attentes de l'API
   formData.append('title', document.getElementById('titre').value);
   // Convertis l'ID de catégorie en nombre si nécessaire
-  formData.append('categoryId', parseInt(document.getElementById('categoryId').value));
+  formData.append('categoryId', document.getElementById('categoryId').value);
 
   // Pour afficher les valeurs de FormData dans la console
   for (var pair of formData.entries()) {
     console.log(pair[0]+ ': ' + pair[1]); 
   }
 
-  fetch('http://localhost:5678/api/works', {
+  UrlData = 'http://localhost:5678/api/works' 
+  console.log(UrlData)
+  fetch(UrlData, {
       method: 'POST',
       body: formData,
       headers: {
@@ -308,10 +273,10 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
       console.log('Success:', data);
       alert('Image et données enregistrées avec succès !');
   })
+
   .catch(error => {
       console.error('Error:', error);
       alert('Erreur lors de l’envoi des données');
   });
 });
-
 

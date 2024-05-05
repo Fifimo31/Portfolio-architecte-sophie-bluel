@@ -2,17 +2,18 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
-	<title>Sophie Bluel - Architecte d'intérieur</title>
-	<script src="https://kit.fontawesome.com/0e74627742.js" crossorigin="anonymous"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
-	<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-	<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <title>Sophie Bluel - Architecte d'intérieur</title>
+    <script src="https://kit.fontawesome.com/0e74627742.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+    <meta name="description" content="Découvrez les projets d'architecture d'intérieur de Sophie Bluel, architecte d'intérieur spécialisée dans le design moderne et innovant.">
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
 </head>
 <body>
 
@@ -72,15 +73,15 @@
 										<!--<input type="file" name="image" id="image" accept="image/png, image/jpeg">-->
 									
 										<label for="titre">Titre</label>
-										<input type="text" name="titre" id="titre">
+										<input type="text" id="titre">
 									
 										<label for="categorie">Catégorie</label>
-										<select name="categorie" id="categoryId">
-										<option value=""></option>
-										<option id="1" name="Objets">Objets</option>
-										<option id="2" name="Appartements">Appartements</option>
-										<option id="3" name="Hotels & restaurants">Hôtels & restaurants</option>
-										</select>
+											<select id="categoryId">
+												<option value=""></option>
+												<option value="1">Objets</option>
+												<option value="2">Appartements</option>
+												<option value="3">Hôtels & restaurants</option>
+											</select>
 									</div>
 									<input type="submit" value="valider">
 									<input type="submit" value="valider" style="display: none;" class="btn">
