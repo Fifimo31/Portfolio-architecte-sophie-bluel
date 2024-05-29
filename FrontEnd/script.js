@@ -102,18 +102,6 @@ if (!token){
 }
 
 
-const openModal = (e) => {
-  e.preventDefault();
-  const targetHref = e.currentTarget.getAttribute('href'); // Utiliser 'currentTarget' pour cibler l'élément a
-  const target = document.querySelector(targetHref);
-  target.style.display = null;
-};
-document.querySelectorAll('.js-modal').forEach(modalTrigger => {
-  modalTrigger.addEventListener('click', openModal);
-});
-
-
-
 const openModalForm = (e) => {
   e.preventDefault();
   const targetHref = e.currentTarget.getAttribute('href'); // Utiliser 'currentTarget' pour cibler l'élément a
@@ -200,17 +188,59 @@ console.log(dataIndex)
   })
   
 };
-modalgallery.addEventListener('click', (event) => {
-  if (event.target.classList.contains('trashCan')) {
-    const figureElement = event.target.closest('figure'); // Trouver le parent <figure> le plus proche
-    const dataIndex = parseInt(figureElement.getAttribute('data-index'));
-    const imageElement = figureElement.querySelector('img');
-    const imageUrl = imageElement.getAttribute('src');
-    deleteImage(dataIndex, imageUrl);
+
+
+const previewFile = () => {
+  const previewContainer = document.querySelector('#ajouterPhoto');
+  const fileInputElement = document.querySelector('input[type=file]');
+  const file = fileInputElement.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = function() {
+      let imgElement = previewContainer.querySelector('img');
+      if (!imgElement) {
+        imgElement = document.createElement('img');
+        previewContainer.appendChild(imgElement);
+      }
+      imgElement.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    const imgElement = previewContainer.querySelector('img');
+    if (imgElement) {
+      imgElement.src = "";
+    }
   }
+}
+
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+  formData.append('title', document.getElementById('titre').value);
+  formData.append('categoryId', parseInt(document.getElementById('categoryId').value, 10));
+  formData.append("image", document.querySelector('input[type=file]').files[0]);
+
+  const request = new XMLHttpRequest();
+  request.open("POST", 'http://localhost:5678/api/works');
+  request.onload = () => {
+    if (request.status == 200) {
+      console.log('Soumission réussie:', request.responseText);
+      alert('Image et données enregistrées avec succès !');
+    } else {
+      throw new Error('Échec de la soumission');
+    }
+  };
+  request.onerror = () => {
+    console.error('Erreur lors de la soumission des données:', request.statusText);
+    alert('Erreur lors de l\'envoi des données');
+  };
+  request.send(formData);
 });
 
-function previewFile() {
+
+/*function previewFile() {
   const previewContainer = document.querySelector('#ajouterPhoto'); // Assurez-vous que cet ID est correct
   const file = document.querySelector('input[type=file]').files[0]; // Obtient le fichier depuis l'input
 
@@ -242,18 +272,33 @@ function previewFile() {
 document.getElementById('uploadForm').addEventListener('submit', function(event) {
   event.preventDefault();
 
-  var formData = new FormData(this);
+  const formData = new FormData();
   
   // Assure-toi que 'title' et 'category' correspondent aux attentes de l'API
   formData.append('title', document.getElementById('titre').value);
   // Convertis l'ID de catégorie en nombre si nécessaire
   formData.append('categoryId', document.getElementById('categoryId').value);
-
+  formData.append("image", fileInputElement.files[0]);
   // Pour afficher les valeurs de FormData dans la console
+  
+
+  
+  const content = `<figure data-index="${index}">
+                      <img src="${item.imageUrl}" alt="Abajour Tahina">
+                      <div class="framIcon trashCan"></div>
+                      <figcaption>éditer</figcaption>
+                    </figure>';`
+ 
+  const blob = new Blob([content], { type: "text/xml" });
+  formData.append("webmasterfile", blob);
+  const request = new XMLHttpRequest();
+
+  request.open("POST", 'http://localhost:5678/api/works');
+  request.send(formData);
   for (var pair of formData.entries()) {
     console.log(pair[0]+ ': ' + pair[1]); 
-  }
-
+  }*/
+/*
   UrlData = 'http://localhost:5678/api/works' 
   console.log(UrlData)
   fetch(UrlData, {
@@ -278,5 +323,5 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
       console.error('Error:', error);
       alert('Erreur lors de l’envoi des données');
   });
-});
+});*/
 
